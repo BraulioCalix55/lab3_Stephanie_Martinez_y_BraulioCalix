@@ -12,15 +12,17 @@ public class Lab3_StephanieMartinez_y_BraulioCalix {
     static Object[][] table = new Object[10][10];
     static Object[][] mat2 = new Object[10][10];
     static int con1 = 5, con2 = 5;
-
+    static ArrayList<Soldado> soldados = new ArrayList();
+    static ArrayList<Armas> armas = new ArrayList();
+    static ArrayList<Ejercito> ejercito = new ArrayList();
+    static String nombre1;
+    static String nombre2;
     public static void main(String[] args) {
         Scanner leer = new Scanner(System.in);
         int opcion = 0;
         int pos = 0;
         Armas arma = null;
-        ArrayList<Ejercito> ejercito = new ArrayList();
-        ArrayList<Soldado> soldados = new ArrayList();
-        ArrayList<Armas> armas = new ArrayList();
+
         while (opcion != 5) {
             System.out.println("\n------------------------------------");
             System.out.println("1.- Ejercitos\n2.- Soldados\n3.- Armas\n4.- Hacer guerra\n5.- Salir");
@@ -243,6 +245,7 @@ public class Lab3_StephanieMartinez_y_BraulioCalix {
                 int guerra = leer.nextInt();
                 switch (guerra) {
                     case 1:
+                        administrar();
                         break;
                     case 2:
                         guerrilla();
@@ -284,10 +287,10 @@ public class Lab3_StephanieMartinez_y_BraulioCalix {
             }
             System.out.println("");
         }
-        
-        System.out.println("jugador 1");
+
+        System.out.println("ejercito :"+nombre1);
         llenar(table);
-        System.out.println("jugador 2");
+        System.out.println("Ejercito :"+nombre2);
         llenar(mat2);
         int tipo = 0;
         boolean seguir = true;
@@ -467,5 +470,24 @@ public class Lab3_StephanieMartinez_y_BraulioCalix {
         }
 
     }
-    
+
+    public static void administrar() {
+        ArrayList<Ejercito> temp = new ArrayList();
+        for (int i = 0; i < ejercito.size(); i++) {
+            System.out.println(i + ")" + ejercito.get(i).getNombre());
+        }
+        System.out.println("ingrese el numero del ejercito que quiere usar");
+        int nu = leer.nextInt();
+        temp.add(ejercito.get(nu));
+        ejercito.remove(nu);
+        nombre1 = ejercito.get(nu).getNombre();
+        for (int i = 0; i < ejercito.size(); i++) {
+            System.out.println(i + ")" + ejercito.get(i).getNombre());
+        }
+        System.out.println("ingrese el numero del ejercito que quiere usar");
+        int na=leer.nextInt();
+        nombre2=ejercito.get(na).getNombre();
+        ejercito.add(nu, temp.get(0));
+        
+    }
 }
