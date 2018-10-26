@@ -8,6 +8,10 @@ public class Lab3_StephanieMartinez_y_BraulioCalix {
 
     static Random R = new Random();
     static Roca ro = new Roca();
+    static Scanner leer = new Scanner(System.in);
+    static Object[][] table = new Object[10][10];
+    static Object[][] mat2 = new Object[10][10];
+    static int con1 = 5, con2 = 5;
 
     public static void main(String[] args) {
         Scanner leer = new Scanner(System.in);
@@ -73,7 +77,7 @@ public class Lab3_StephanieMartinez_y_BraulioCalix {
                     int num = leer.nextInt();
                     ejercito.remove(num);
                 }
-                if (opcion == 4) {
+                if (opcion1 == 4) {
                     for (int i = 0; i < ejercito.size(); i++) {
                         System.out.println(i + ". " + ejercito.get(i).toString());
                     }
@@ -232,40 +236,236 @@ public class Lab3_StephanieMartinez_y_BraulioCalix {
                     }
                 }
             }
+
+            if (opcion == 4) {
+                System.out.println("------------------------------------");
+                System.out.println("\n1.- asignar ejercitos\n2.- Dinamica de guerra");
+                int guerra = leer.nextInt();
+                switch (guerra) {
+                    case 1:
+                        break;
+                    case 2:
+                        guerrilla();
+                        break;
+                    default:
+                        break;
+
+                }
+            }
         }
     }
 
-    public static Object[][] llenaroca(Object mat[][]) {
-
+    public static Object[][] llenaroca(Object mat[][], Object mat2[][]) {
         for (int i = 0; i < 20; i++) {
             int pos1 = 1 + R.nextInt(9), pos2 = 1 + R.nextInt(9);
-            if (mat[pos1][pos2].equals(ro.toString())) {
+            if (mat[pos1][pos2].equals(ro.toString()) || mat2[pos1][pos2].equals(ro.toString())) {
                 i--;
             } else {
                 mat[pos1][pos2] = ro.toString();
+                mat2[pos1][pos2] = ro.toString();
             }
         }
         return mat;
     }
 
-    public static void crearmat() {
-
-        Object[][] table = new Object[10][10];
-
+    public static void guerrilla() {
+        int pos = 0;
+        // TODO code application logic here
         for (int i = 0; i < table.length; i++) {
             for (int j = 0; j < table[i].length; j++) {
                 table[i][j] = "[ ]";
-
+                mat2[i][j] = "[ ]";
             }
-
         }
-        table = llenaroca(table);
+        table = llenaroca(table, mat2);
         for (int i = 0; i < table.length; i++) {
             for (int j = 0; j < table[i].length; j++) {
                 System.out.print(table[i][j]);
-
             }
             System.out.println("");
         }
+        
+        System.out.println("jugador 1");
+        llenar(table);
+        System.out.println("jugador 2");
+        llenar(mat2);
+        int tipo = 0;
+        boolean seguir = true;
+        while (seguir = true) {
+            if (pos == 0) {
+
+                System.out.println("ejercito 1:");
+                System.out.println("ingrese la posicion de x del que quiere mover");
+                int x = leer.nextInt();
+                System.out.println("ingrese la posicion de y del que quiere mover");
+                int y = leer.nextInt();
+                while (table[x][y].equals("[ ]")) {
+                    System.out.println("no selecciono nada");
+                    System.out.println("vuelva a ingresar x: ");
+                    x = leer.nextInt();
+                    System.out.println("vuelva a ingresar y: ");
+                    y = leer.nextInt();
+                }
+                if (table[x][y].equals("[G]")) {
+                    tipo = 1;
+                } else if (table[x][y].equals("[C]")) {
+                    tipo = 2;
+                } else if (table[x][y].equals("[E]")) {
+                    tipo = 3;
+                }
+                System.out.println("ingrese la posicion de x a donde lo quiere mover ");
+                int x2 = leer.nextInt();
+                System.out.println("ingrese la posicion de y a donde lo quiere mover");
+                int y2 = leer.nextInt();
+                if (mat2[x2][y2].equals("[G]") || mat2[x2][y2].equals("[E]") || mat2[x2][y2].equals("[C]")) {
+                    System.out.println("aqui hay un SOLDADO");
+                } else if (mat2[x2][y2].equals("[R]")) {
+                    System.out.println("aqui hay una PIEDRA");
+                } else {
+                    System.out.println("movimiento aceptado");
+                    if (tipo == 1) {
+                        table[x][y] = "[ ]";
+                        table[x2][y2] = "[G]";
+                    } else if (tipo == 2) {
+                        table[x][y] = "[ ]";
+                        table[x2][y2] = "[C]";
+                    } else if (tipo == 3) {
+                        table[x][y] = "[ ]";
+                        table[x2][y2] = "[E]";
+                    }
+                }
+                System.out.println("ingrese la posicion de x donde quiere atacar");
+                int ax = leer.nextInt();
+                System.out.println("ingrese la posicion de y donde quiere atacar");
+                int ay = leer.nextInt();
+                if (mat2[ax][ay].equals("[G]") || mat2[ax][ay].equals("[E]") || mat2[ax][ay].equals("[C]")) {
+                    System.out.println("aqui hay un SOLDADO");
+                    mat2[ax][ay] = "[X]";
+                    con2--;
+                }
+            } else {
+                System.out.println("ejercito 2");
+                System.out.println("ingrese la posicion de x del que quiere mover");
+                int x = leer.nextInt();
+                System.out.println("ingrese la posicion de y del que quiere mover");
+                int y = leer.nextInt();
+                while (mat2[x][y].equals("[ ]")) {
+                    System.out.println("no selecciono nada");
+                    System.out.println("vuelva a ingresar x: ");
+                    x = leer.nextInt();
+                    System.out.println("vuelva a ingresar y: ");
+                    y = leer.nextInt();
+                }
+                if (mat2[x][y].equals("[G]")) {
+                    tipo = 1;
+                } else if (mat2[x][y].equals("[C]")) {
+                    tipo = 2;
+                } else if (mat2[x][y].equals("[E]")) {
+                    tipo = 3;
+                }
+                System.out.println("ingrese la posicion de x a donde lo quiere mover ");
+                int x2 = leer.nextInt();
+                System.out.println("ingrese la posicion de y a donde lo quiere mover");
+                int y2 = leer.nextInt();
+                if (table[x2][y2].equals("[G]") || table[x2][y2].equals("[E]") || table[x2][y2].equals("[C]")) {
+                    System.out.println("aqui hay un SOLDADO");
+                } else if (table[x2][y2].equals("[R]")) {
+                    System.out.println("aqui hay una PIEDRA");
+                } else {
+                    System.out.println("movimiento aceptado");
+                    if (tipo == 1) {
+                        mat2[x][y] = "[ ]";
+                        mat2[x2][y2] = "[G]";
+                    } else if (tipo == 2) {
+                        mat2[x][y] = "[ ]";
+                        mat2[x2][y2] = "[C]";
+                    } else if (tipo == 3) {
+                        mat2[x][y] = "[ ]";
+                        mat2[x2][y2] = "[E]";
+                    }
+                }
+                System.out.println("ingrese la posicion de x donde quiere atacar");
+                int ax = leer.nextInt();
+                System.out.println("ingrese la posicion de y donde quiere atacar");
+                int ay = leer.nextInt();
+                if (table[ax][ay].equals("[G]") || table[ax][ay].equals("[E]") || table[ax][ay].equals("[C]")) {
+                    System.out.println("aqui hay un SOLDADO");
+                    table[ax][ay] = "[X]";
+                    con1--;
+                }
+            }
+            if (con1 < 1 || con2 < 1) {
+                seguir = false;
+            }
+            if (con1 > 0) {
+                System.out.println("el jugador uno gano");
+            } else if (con2 > 1) {
+                System.out.println("el jugador dos gano");
+            }
+        }
     }
+
+    public static void llenar(Object[][] mat) {
+        System.out.println("ingrese la posicion x del general");
+        int x = leer.nextInt();
+        System.out.println("ingrese la posicion y del general");
+        int y = leer.nextInt();
+        while ((x > 9 || y > 9) || x < 0 || y < -0) {
+            System.out.println("valores invalidos");
+            System.out.println("ingrese la posicion x del general");
+            x = leer.nextInt();
+            System.out.println("ingrese la posicion y del general");
+            y = leer.nextInt();
+        }
+        mat[x][y] = "[G]";
+        for (int i = 0; i < mat.length; i++) {
+            for (int j = 0; j < mat[i].length; j++) {
+                System.out.print(mat[i][j]);
+            }
+            System.out.println("");
+        }
+
+        for (int m = 0; m < 3; m++) {
+
+            System.out.println("ingrese la posicion x del caballero");
+            x = leer.nextInt();
+            System.out.println("ingrese la posicion y del caballero");
+            y = leer.nextInt();
+            while ((x > 9 || y > 9) || x < 0 || y < -0) {
+                System.out.println("valores invalidos");
+                System.out.println("ingrese la posicion x del caballero");
+                x = leer.nextInt();
+                System.out.println("ingrese la posicion y del caballero");
+                y = leer.nextInt();
+            }
+            mat[x][y] = "[C]";
+            for (int i = 0; i < mat.length; i++) {
+                for (int j = 0; j < mat[i].length; j++) {
+                    System.out.print(mat[i][j]);
+                }
+                System.out.println("");
+            }
+
+        }
+        System.out.println("ingrese la posicion x del ejecutor");
+        x = leer.nextInt();
+        System.out.println("ingrese la posicion y del ejecutor");
+        y = leer.nextInt();
+        while ((x > 9 || y > 9) || x < 0 || y < -0) {
+            System.out.println("valores invalidos");
+            System.out.println("ingrese la posicion x del ejecutar");
+            x = leer.nextInt();
+            System.out.println("ingrese la posicion y del ejecutar");
+            y = leer.nextInt();
+        }
+        mat[x][y] = "[E]";
+        for (int i = 0; i < mat.length; i++) {
+            for (int j = 0; j < mat[i].length; j++) {
+                System.out.print(mat[i][j]);
+            }
+            System.out.println("");
+        }
+
+    }
+    
 }
