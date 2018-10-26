@@ -7,6 +7,7 @@ import java.util.Random;
 public class Lab3_StephanieMartinez_y_BraulioCalix {
 
     static Random R = new Random();
+    static Roca ro=new Roca();
     public static void main(String[] args) {
         Scanner leer = new Scanner(System.in);
         int opcion = 0;
