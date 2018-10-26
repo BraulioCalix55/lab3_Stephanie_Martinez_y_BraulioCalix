@@ -12,7 +12,8 @@ import java.util.ArrayList;
  * @author User
  */
 public class Ejercito {
-    private String nombre ;
+
+    private String nombre;
     private String region;
     private int victorias;
     private double dinero;
@@ -28,8 +29,6 @@ public class Ejercito {
         this.dinero = dinero;
         this.soldados = soldados;
     }
-
-  
 
     public String getNombre() {
         return nombre;
