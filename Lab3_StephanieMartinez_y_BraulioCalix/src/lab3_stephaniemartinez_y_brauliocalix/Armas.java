@@ -49,7 +49,7 @@ public class Armas {
 
     @Override
     public String toString() {
-        return "Armas{" + "nombre=" + nombre + ", alcance=" + alcance + ", precio=" + precio + '}';
+        return "    Armas{" + "nombre = " + nombre + ", alcance = " + alcance + ", precio = " + precio + '}';
     }
     
 }
