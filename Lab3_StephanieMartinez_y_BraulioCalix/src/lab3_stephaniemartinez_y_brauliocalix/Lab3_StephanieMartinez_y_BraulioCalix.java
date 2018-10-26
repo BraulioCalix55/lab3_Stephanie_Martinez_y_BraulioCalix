@@ -178,7 +178,23 @@ public class Lab3_StephanieMartinez_y_BraulioCalix {
                         int alcance = leer.nextInt();
                         System.out.print("Ingrese el precio: ");
                         double precio = leer.nextDouble();
-                        armas.add(new Bomba(mat,nombre, alcance, precio));
+                        armas.add(new Bomba(mat, nombre, alcance, precio));
+                    } else if (opa == 2) {
+                        System.out.print("Desea que el rifle sea automático 1 para si, 2 para no");
+                        int auto = leer.nextInt();
+                        System.out.print("Ingrese el alcance: ");
+                        int alcance = leer.nextInt();
+                        System.out.print("Ingrese el precio: ");
+                        double precio = leer.nextDouble();
+                        armas.add(new Rifle(auto, nombre, alcance, precio));
+                    } else if (opa == 3) {
+                        System.out.print("Ingrese el material: ");
+                        String mat = leer.next();
+                        System.out.print("Ingrese el alcance: ");
+                        int alcance = leer.nextInt();
+                        System.out.print("Ingrese el precio: ");
+                        double precio = leer.nextDouble();
+                        armas.add(new ArmaBlanca(mat, nombre, alcance, precio));
                     }
 
                 }
