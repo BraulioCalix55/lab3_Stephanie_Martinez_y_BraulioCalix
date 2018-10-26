@@ -70,7 +70,7 @@ public class Soldado {
 
     @Override
     public String toString() {
-        return "Soldado{" + "nombre=" + nombre + ", lugar=" + lugar + ", edad=" + edad + ", salud=" + salud + ", arma=" + arma + '}';
+        return "    Soldado{" + "nombre = " + nombre + ", lugar = " + lugar + ", edad = " + edad + ", salud = " + salud +  '}';
     }
 
 }
