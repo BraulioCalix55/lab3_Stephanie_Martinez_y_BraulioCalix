@@ -241,7 +241,7 @@ public class Lab3_StephanieMartinez_y_BraulioCalix {
 
             if (opcion == 4) {
                 System.out.println("------------------------------------");
-                System.out.println("\n1.- asignar ejercitos\n2.- Dinamica de guerra");
+                System.out.println("\n1.- asignar ejercitos\n2.- Dinamica de guerra\n3.- Comprar y asignar armas");
                 int guerra = leer.nextInt();
                 switch (guerra) {
                     case 1:
@@ -250,6 +250,11 @@ public class Lab3_StephanieMartinez_y_BraulioCalix {
                     case 2:
                         guerrilla();
                         break;
+                    case 3:
+                        System.out.print("Ingrese el ejercito: ");
+                        int pose = leer.nextInt();
+                        System.out.print("Ingrese el soldado al que le quiere asignar el arma: ");
+                        int poss = leer.nextInt();
                     default:
                         break;
 
